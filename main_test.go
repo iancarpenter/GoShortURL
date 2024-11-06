@@ -53,3 +53,24 @@ func TestShorten(t *testing.T) {
 		}
 	}
 }
+func TestMain(t *testing.T) {
+	go main()
+
+	resp, err := http.Get("http://localhost:8080/shorten?url=http://example.com")
+	if err != nil {
+		t.Fatalf("Failed to send GET request: %v", err)
+	}
+	defer resp.Body.Close()
+
+	if resp.StatusCode != http.StatusOK {
+		t.Errorf("Expected status code 200, got %d", resp.StatusCode)
+	}
+
+	expected := "Shortened URL: example.com\n"
+	body := make([]byte, len(expected))
+	resp.Body.Read(body)
+
+	if string(body) != expected {
+		t.Errorf("Expected response body %q, got %q", expected, string(body))
+	}
+}
