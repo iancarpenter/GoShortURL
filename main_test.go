@@ -6,6 +6,9 @@ import (
 	"testing"
 )
 
+// This test ensures that the shortenURL function correctly processes various URL inputs.
+// It verifies that valid URLs are shortened properly and invalid URLs return "Invalid URL".
+// The test covers different scenarios including valid HTTP and HTTPS URLs, invalid URLs, and empty URL inputs.
 func TestShortenURL(t *testing.T) {
 	tests := []struct {
 		input    string
@@ -26,6 +29,9 @@ func TestShortenURL(t *testing.T) {
 	}
 }
 
+// This test ensures that the shorten function correctly processes various URL inputs.
+// It verifies that valid URLs are shortened properly and invalid URLs return "Invalid URL".
+// The test covers different scenarios including valid HTTP and HTTPS URLs, invalid URLs, and empty URL inputs.
 func TestShorten(t *testing.T) {
 	tests := []struct {
 		query    string
@@ -53,6 +59,10 @@ func TestShorten(t *testing.T) {
 		}
 	}
 }
+
+// This test ensures that the HTTP server is correctly set up and can handle requests to the "/shorten" endpoint.
+// It verifies that a GET request to the endpoint returns a status code of 200 (OK).
+// Additionally, it checks that the response body contains the expected shortened URL.
 func TestMain(t *testing.T) {
 	go main()
 
