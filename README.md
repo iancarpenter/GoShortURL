@@ -21,13 +21,6 @@ GoShortURL is a simple URL shortening service written in Go. It provides an HTTP
     go build -o goshorturl
     ```
 
-### Running the Application
-
-To run the application, execute the following command:
-```sh
-./goshorturl
-
-
 ### Environment Variables
 
 The application relies on the following Environment Variables 
@@ -38,3 +31,11 @@ The application relies on the following Environment Variables
 4. PG_PASSWORD
 5. PG_DB_NAME
 6. PG_DB_SSLMODE
+
+### Running the Application
+
+To run the application, execute the following command:
+```sh
+./goshorturl
+
+```
