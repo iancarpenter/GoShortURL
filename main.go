@@ -89,22 +89,16 @@ func insertURLRecord(db *sql.DB, u string, parsedURL string) error {
 // Connects to the database using credentials from environment variables.
 func connectToDB() (*sql.DB, error) {
 	connStr := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=%s",
-		getEnv("PG_HOST"),
-		getEnv("PG_PORT"),
-		getEnv("PG_USER"),
-		getEnv("PG_PASSWORD"),
-		getEnv("PG_DB_NAME"),
-		getEnv("PG_DB_SSLMODE"))
+		os.Getenv("PG_HOST"),
+		os.Getenv("PG_PORT"),
+		os.Getenv("PG_USER"),
+		os.Getenv("PG_PASSWORD"),
+		os.Getenv("PG_DB_NAME"),
+		os.Getenv("PG_DB_SSLMODE"))
 
 	db, err := sql.Open("postgres", connStr)
 	if err != nil {
 		return nil, err
 	}
 	return db, nil
-}
-
-// Retrieves the value of an environment variable.
-func getEnv(key string) string {
-	value, _ := os.LookupEnv(key)
-	return value
 }
