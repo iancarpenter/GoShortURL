@@ -53,6 +53,7 @@ func shortenURL(u string) string {
 	return parsedURL.Host
 }
 
+// Calls the insertURLRecord function to save the original URL and the shortened URL to the database.
 func saveURLToDatabase(u string, parsedURL string) error {
 	db, err := connectToDB()
 	if err != nil {
@@ -68,8 +69,9 @@ func saveURLToDatabase(u string, parsedURL string) error {
 	return nil
 }
 
+// Inserts a record into the database with the original URL and the shortened URL.
 func insertURLRecord(db *sql.DB, u string, parsedURL string) error {
-	var insertSQL string = "INSERT INTO shorten.url_shorten(original_url,shorten_url)  values($1, $2)"
+	const insertSQL string = "INSERT INTO shorten.url_shorten(original_url,shorten_url)  values($1, $2)"
 
 	stmt, err := db.Prepare(insertSQL)
 	if err != nil {
@@ -84,6 +86,7 @@ func insertURLRecord(db *sql.DB, u string, parsedURL string) error {
 	return nil
 }
 
+// Connects to the database using credentials from environment variables.
 func connectToDB() (*sql.DB, error) {
 	connStr := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=%s",
 		getEnv("PG_HOST"),
@@ -100,6 +103,7 @@ func connectToDB() (*sql.DB, error) {
 	return db, nil
 }
 
+// Retrieves the value of an environment variable.
 func getEnv(key string) string {
 	value, _ := os.LookupEnv(key)
 	return value
